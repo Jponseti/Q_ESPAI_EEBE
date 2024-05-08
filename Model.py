@@ -1,3 +1,5 @@
+#patata
+
 from math import log10, sqrt
 
 # las funciones puramente de cálculo que no tienen nada que ver con el interfaz grafico
