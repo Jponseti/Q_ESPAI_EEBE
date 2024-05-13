@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
         self.label = QLabel(self.centralwidget)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(0, 0, 1321, 711))
-        self.label.setPixmap(QPixmap(u"EEBE_Mapa_Temperatures/dibuix.png"))
+        self.label.setPixmap(QPixmap(u"dibuix.png"))
         self.label.setScaledContents(True)
         self.aula1 = QLabel(self.centralwidget)
         self.aula1.setObjectName(u"aula1")
