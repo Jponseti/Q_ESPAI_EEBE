@@ -1,7 +1,7 @@
 from PyQt5 import QtCore
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QMessageBox, QMainWindow, QApplication
-from ui_proba import Ui_MainWindow as form_class
+from ui_mapa import Ui_MainWindow as form_class
 import sys
 
 
@@ -31,7 +31,7 @@ class View(QMainWindow, form_class):
     def salida(self):
         self.T_aula1.textChanged.connect(self.presenter.temperature_changed)
 
-   def update_color(self):
+    def update_color(self):
         if 1 <= int(self.T_aula1.text()) <= 10:
             print(self.T_aula1.text())
             self.aula1.setPixmap(QPixmap("red"))
@@ -39,4 +39,6 @@ class View(QMainWindow, form_class):
             self.aula1.setStyleSheet("background-color: red")
         else:
             self.aula1.setStyleSheet("")
-
+if __name__ == '__main__':
+    V = View()
+    input()
