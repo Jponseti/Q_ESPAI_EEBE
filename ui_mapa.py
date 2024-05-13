@@ -15,30 +15,29 @@ from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
     QRadialGradient)
 from PyQt5.QtWidgets import *
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(1338, 743)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.label = QLabel(self.centralwidget)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(0, 0, 811, 551))
-        self.label.setPixmap(QPixmap(u"C\u00f2pia de Dibuix sense t\u00edtol.png"))
+        self.label.setGeometry(QRect(0, 0, 1321, 711))
+        self.label.setPixmap(QPixmap(u"EEBE_Mapa_Temperatures/dibuix.png"))
         self.label.setScaledContents(True)
-        self.label_2 = QLabel(self.centralwidget)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(30, 270, 121, 61))
-        self.label_2.setPixmap(QPixmap(u"cuadrado blanco.png"))
-        self.label_2.setScaledContents(True)
-        self.lineEdit = QLineEdit(self.centralwidget)
-        self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setGeometry(QRect(80, 100, 113, 20))
+        self.aula1 = QLabel(self.centralwidget)
+        self.aula1.setObjectName(u"aula1")
+        self.aula1.setGeometry(QRect(50, 340, 191, 91))
+        self.aula1.setPixmap(QPixmap(u"cuadrado blanco.png"))
+        self.aula1.setScaledContents(True)
+        self.T_aula1 = QLineEdit(self.centralwidget)
+        self.T_aula1.setObjectName(u"T_aula1")
+        self.T_aula1.setGeometry(QRect(100, 180, 113, 20))
         self.calendarWidget = QCalendarWidget(self.centralwidget)
         self.calendarWidget.setObjectName(u"calendarWidget")
-        self.calendarWidget.setGeometry(QRect(330, 10, 101, 101))
+        self.calendarWidget.setGeometry(QRect(250, 0, 341, 201))
         self.horizontalSlider = QSlider(self.centralwidget)
         self.horizontalSlider.setObjectName(u"horizontalSlider")
         self.horizontalSlider.setGeometry(QRect(10, 530, 781, 20))
@@ -46,14 +45,14 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 800, 22))
+        self.menubar.setGeometry(QRect(0, 0, 1338, 22))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.lineEdit.textChanged.connect(self.label_2.setText)
+        self.T_aula1.textChanged.connect(MainWindow.update_color)
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
@@ -61,6 +60,6 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.label.setText("")
-        self.label_2.setText("")
+        self.aula1.setText("")
     # retranslateUi
 
