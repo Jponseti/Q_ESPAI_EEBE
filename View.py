@@ -39,6 +39,9 @@ class View(QMainWindow, form_class):
             self.aula1.setStyleSheet("background-color: red")
         else:
             self.aula1.setStyleSheet("")
+
+
+
 if __name__ == '__main__':
     V = View()
     input()
