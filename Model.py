@@ -1,14 +1,13 @@
-#patata
+import pandas as pd
 
-from math import log10, sqrt
+class TemperatureModel:
+    def __init__(self, filename):
+        self.df = pd.read_excel(filename)
 
-# las funciones puramente de cálculo que no tienen nada que ver con el interfaz grafico
-class Model(object):
-    def __init__(self):
-        self.temperatura = 0
-
-    def set_value(self, temperatura):
-        self.temperatura = temperatura
-
-    def get_value(self):
-        return self.temperatura
+    def get_temperature(self, day, month, year, room):
+        row = self.df[(self.df['Dia'] == day) & (self.df['Mes'] == month) & (self.df['Any'] == year)]
+        if not row.empty:
+            temperature = row[room].values[0]
+            return temperature
+        else:
+            return 'No hi ha dades'

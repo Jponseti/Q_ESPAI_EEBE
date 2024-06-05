@@ -1,34 +1,25 @@
-# Aqui esta el codigo que conecta View con Model
-from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtWidgets import QApplication, QDialog, QVBoxLayout, QLineEdit, QLabel
-from PyQt5.QtGui import QColor
+class MainPresenter:
+    def __init__(self, view):
+        self.view = view
 
-class Presenter(object):
-    # Pasar el View y el Model dentro del Presenter
-    def __init__(self, view,model):
-        self.vista = view
-        self.modelo = model
-        #captura de las señales del View y conectando con funciones del Presenter
-        #self.vista.btncolor.connect(self.update_model) #Conecta del View
+        self.view.dia.addItems([str(i) for i in range(1, 31)])
+        self.view.mes.addItems([str(i) for i in range(1, 13)])
+        self.view.any.addItems(['2024'])
 
+        self.view.dia.currentIndexChanged.connect(self.actualitzar_temperatures)
+        self.view.mes.currentIndexChanged.connect(self.actualitzar_temperatures)
+        self.view.any.currentIndexChanged.connect(self.actualitzar_temperatures)
 
-    # Funciones del Presenter
-    def temperature_changed(self,temperatura):
-        try:
-            temperatura = float(temperatura)
-            self.model.set_temperatura(int(temperatura))
-            self.update_color()
-        except ValueError as err:
-            self.vista.mensaje('Error', str(err))
+    def actualitzar_temperatures(self):
+        if self.view.dia.currentText() == '-' or self.view.mes.currentText() == '-' or self.view.any.currentText() == '-':
+            return
 
+        day = int(self.view.dia.currentText())
+        month = int(self.view.mes.currentText())
+        year = int(self.view.any.currentText())
 
-    #def update_color(self, temperatura):
-       # if 1 <= temperatura <= 10:
-      #      self.view.aula1.setStyleSheet("background-color: blue")
-       # elif 10 < temperatura <= 20:
-       #     self.view.aula1.setStyleSheet("background-color: red")
-      #  else:
-       #     self.view.aula1.setStyleSheet("")
-
-    def mensaje(self,prompt,txt):
-        QMessageBox.information(self,'Error',txt)
+        for i in range(1, 19):  # Ajustament de l'índex superior a 19
+            room = f'H{i}'
+            temperature = self.view.model.get_temperature(day, month, year, room)
+            label = getattr(self.view, f'A{i}')
+            label.setText(f"{temperature}°C")

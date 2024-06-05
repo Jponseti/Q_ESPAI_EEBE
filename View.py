@@ -1,47 +1,31 @@
-from PyQt5 import QtCore
-from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QMessageBox, QMainWindow, QApplication
-from ui_mapa import Ui_MainWindow as form_class
-import sys
+from PyQt5.QtWidgets import QMainWindow, QLabel, QComboBox
+from ui_EEBE_mapa import Ui_Planta_3
+from model import TemperatureModel
 
-
-class View(QMainWindow, form_class):
-    # la definicion del objeto (QtWidgets.QMainWindow) debera ser la misma que en el Main
-    # crear los signals para enviarlos al Presenter
-    btncolor = QtCore.pyqtSignal()
-
-
-    def __init__(self, parent=None):
-        # icicializamos el formulario poniendo los componentes a los valores iniciales.
-        QMainWindow.__init__(self, parent)
+class MainView(QMainWindow, Ui_Planta_3):
+    def __init__(self):
+        super(MainView, self).__init__()
         self.setupUi(self)
-        # poner componentes a su valor inicial
+        self.model = TemperatureModel('temperatures_habitacions.xlsx')
 
-    # definicion de los slots
-    def color(self):
-        self.btncolor.emit() # se emite la señal para el presenter
+        self.dia.addItems([str(i) for i in range(1, 31)])
+        self.mes.addItems([str(i) for i in range(1, 13)])
+        self.any.addItems(['2024'])
 
-    def entrada(self):
-        try:
-            a = float(self.T_aula1.text())
-            return a
-        except:
-            raise ValueError('error', str(sys.exc_info()[1]))
+        self.dia.currentIndexChanged.connect(self.actualitzar_temperatures)
+        self.mes.currentIndexChanged.connect(self.actualitzar_temperatures)
+        self.any.currentIndexChanged.connect(self.actualitzar_temperatures)
 
-    def salida(self):
-        self.T_aula1.textChanged.connect(self.presenter.temperature_changed)
+    def actualitzar_temperatures(self):
+        if self.dia.currentText() == '-' or self.mes.currentText() == '-' or self.any.currentText() == '-':
+            return
 
-    def update_color(self):
-        if 1 <= int(self.T_aula1.text()) <= 10:
-            print(self.T_aula1.text())
-            self.aula1.setPixmap(QPixmap("red"))
-        elif 10 < int(self.T_aula1.text()) <=  20:
-            self.aula1.setStyleSheet("background-color: red")
-        else:
-            self.aula1.setStyleSheet("")
+        day = int(self.dia.currentText())
+        month = int(self.mes.currentText())
+        year = int(self.any.currentText())
 
-
-
-if __name__ == '__main__':
-    V = View()
-    input()
+        for i in range(1, 19):  # Ajustament de l'índex superior a 19
+            room = f'H{i}'
+            temperature = self.model.get_temperature(day, month, year, room)
+            label = getattr(self, f'A{i}')
+            label.setText(f"{temperature}°C")
