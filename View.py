@@ -13,7 +13,7 @@ class MainView(QMainWindow, Ui_Planta_3):
         self.any.addItems(['2024'])
 
         # Configura els QLabel amb fons transparent
-        for i in range(1, 19):
+        for i in range(1, 18):
             label = getattr(self, f'A{i}')
             label.setStyleSheet("background-color: rgba(0, 0, 0, 0);")
 
