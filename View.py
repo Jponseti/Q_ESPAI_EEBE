@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QLabel, QComboBox
-from ui_EEBE_mapa import Ui_Planta_3
+from ui_EEBE_Mapa import Ui_Planta_3
 from model import TemperatureModel
 
 class MainView(QMainWindow, Ui_Planta_3):
