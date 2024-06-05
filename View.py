@@ -12,6 +12,12 @@ class MainView(QMainWindow, Ui_Planta_3):
         self.mes.addItems([str(i) for i in range(1, 13)])
         self.any.addItems(['2024'])
 
+        # Configura els QLabel amb fons transparent
+        for i in range(1, 19):
+            label = getattr(self, f'A{i}')
+            label.setStyleSheet("background-color: rgba(0, 0, 0, 0);")
+
+
         self.dia.currentIndexChanged.connect(self.actualitzar_temperatures)
         self.mes.currentIndexChanged.connect(self.actualitzar_temperatures)
         self.any.currentIndexChanged.connect(self.actualitzar_temperatures)
