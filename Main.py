@@ -1,13 +1,13 @@
 from PyQt5.QtWidgets import QApplication
-from View import View
-from Presenter import Presenter
-from Model import Model
+from View import MainView
+from Presenter import MainPresenter
+from Model import TemperatureModel
 
 def main():
     app = QApplication([])
-    model = Model()  # Crear una instància del model
-    view = View()
-    presenter = Presenter(view, model)  # Passar la vista i el model com a paràmetres al presentador
+    model = TemperatureModel('temperatures_habitacions.xlsx')
+    view = MainView()
+    presenter = MainPresenter(view)
     view.show()
     app.exec_()
 
