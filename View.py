@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QLabel, QComboBox
 from ui_EEBE_Mapa import Ui_Planta_3
-from model import TemperatureModel
+from Model import TemperatureModel
 
 class MainView(QMainWindow, Ui_Planta_3):
     def __init__(self):
