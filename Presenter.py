@@ -1,9 +1,9 @@
-from View import View
 from Model import TemperatureModel
 
-class Presenter:
+class MainPresenter:
     def __init__(self, view):
         self.view = view
+        self.model = TemperatureModel('temperatures_habitacions.xlsx')
 
         self.view.dia.addItems([str(i) for i in range(1, 31)])
         self.view.mes.addItems([str(i) for i in range(1, 13)])
@@ -23,6 +23,6 @@ class Presenter:
 
         for i in range(1, 19):  # Ajustament de l'índex superior a 19
             room = f'H{i}'
-            temperature = self.view.model.get_temperature(day, month, year, room)
+            temperature = self.model.get_temperature(day, month, year, room)
             label = getattr(self.view, f'A{i}')
             label.setText(f"{temperature}°C")
