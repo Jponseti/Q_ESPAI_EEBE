@@ -1,4 +1,7 @@
-class MainPresenter:
+from View import View
+from Model import TemperatureModel
+
+class Presenter:
     def __init__(self, view):
         self.view = view
 

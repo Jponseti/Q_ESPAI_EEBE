@@ -2,9 +2,9 @@ from PyQt5.QtWidgets import QMainWindow, QLabel, QComboBox
 from ui_EEBE_Mapa import Ui_Planta_3
 from Model import TemperatureModel
 
-class MainView(QMainWindow, Ui_Planta_3):
+class View(QMainWindow, Ui_Planta_3):  # Canviar el nom de la classe a 'View'
     def __init__(self):
-        super(MainView, self).__init__()
+        super(View, self).__init__()
         self.setupUi(self)
         self.model = TemperatureModel('temperatures_habitacions.xlsx')
 
