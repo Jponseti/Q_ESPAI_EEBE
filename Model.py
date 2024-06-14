@@ -1,14 +1,25 @@
-#patata
+import pandas as pd
 
-from math import log10, sqrt
+class Model:
+    def __init__(self, filepath):
+        self.filepath = filepath
 
-# las funciones puramente de cálculo que no tienen nada que ver con el interfaz grafico
-class Model(object):
-    def __init__(self):
-        self.temperatura = 0
+    def get_data(self, day, month, year):
+        try:
+            # Cargar el archivo Excel
+            df = pd.read_excel(self.filepath)
 
-    def set_value(self, temperatura):
-        self.temperatura = temperatura
+            # Filtrar los datos según el día, mes y año
+            filtered_data = df[(df['Dia'] == int(day)) &
+                               (df['Mes'] == int(month)) &
+                               (df['Any'] == int(year))]
 
-    def get_value(self):
-        return self.temperatura
+            if not filtered_data.empty:
+                temperatures = {}
+                for i in range(1, 18):  # Suponiendo que hay 17 aulas
+                    temperatures[f'H{i}'] = filtered_data.iloc[0][f'H{i}']
+                return temperatures
+            else:
+                return None
+        except Exception as e:
+            raise e

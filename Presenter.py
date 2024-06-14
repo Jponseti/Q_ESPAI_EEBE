@@ -1,34 +1,37 @@
 # Aqui esta el codigo que conecta View con Model
-from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtWidgets import QApplication, QDialog, QVBoxLayout, QLineEdit, QLabel
-from PyQt5.QtGui import QColor
+from PyQt5.QtCore import QObject
+from Model import Model
 
-class Presenter(object):
-    # Pasar el View y el Model dentro del Presenter
-    def __init__(self, view,model):
-        self.vista = view
-        self.modelo = model
-        #captura de las señales del View y conectando con funciones del Presenter
-        #self.vista.btncolor.connect(self.update_model) #Conecta del View
+class Presenter(QObject):
+    def __init__(self, view, model):
+        super().__init__()
+        self.view = view
+        self.model = model
 
+    def update_labels(self):
+        dia = self.view.dia.currentText()
+        mes = self.view.mes.currentText()
+        anyo = self.view.any.currentText()
 
-    # Funciones del Presenter
-    def temperature_changed(self,temperatura):
-        try:
-            temperatura = float(temperatura)
-            self.model.set_temperatura(int(temperatura))
-            self.update_color()
-        except ValueError as err:
-            self.vista.mensaje('Error', str(err))
+        datos_filtrados = self.model.get_data(dia, mes, anyo)
 
+        if datos_filtrados is None:
+            return
 
-    #def update_color(self, temperatura):
-       # if 1 <= temperatura <= 10:
-      #      self.view.aula1.setStyleSheet("background-color: blue")
-       # elif 10 < temperatura <= 20:
-       #     self.view.aula1.setStyleSheet("background-color: red")
-      #  else:
-       #     self.view.aula1.setStyleSheet("")
-
-    def mensaje(self,prompt,txt):
-        QMessageBox.information(self,'Error',txt)
+        self.view.A1.setText(str(datos_filtrados.get("H1", "")))
+        self.view.A2.setText(str(datos_filtrados.get("H2", "")))
+        self.view.A3.setText(str(datos_filtrados.get("H3", "")))
+        self.view.A4.setText(str(datos_filtrados.get("H4", "")))
+        self.view.A5.setText(str(datos_filtrados.get("H5", "")))
+        self.view.A6.setText(str(datos_filtrados.get("H6", "")))
+        self.view.A7.setText(str(datos_filtrados.get("H7", "")))
+        self.view.A8.setText(str(datos_filtrados.get("H8", "")))
+        self.view.A9.setText(str(datos_filtrados.get("H9", "")))
+        self.view.A10.setText(str(datos_filtrados.get("H10", "")))
+        self.view.A11.setText(str(datos_filtrados.get("H11", "")))
+        self.view.A12.setText(str(datos_filtrados.get("H12", "")))
+        self.view.A13.setText(str(datos_filtrados.get("H13", "")))
+        self.view.A14.setText(str(datos_filtrados.get("H14", "")))
+        self.view.A15.setText(str(datos_filtrados.get("H15", "")))
+        self.view.A16.setText(str(datos_filtrados.get("H16", "")))
+        self.view.A17.setText(str(datos_filtrados.get("H17", "")))
