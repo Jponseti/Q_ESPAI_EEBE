@@ -1,15 +1,21 @@
-from PyQt5.QtWidgets import QApplication
-from View import MainView  # Importem la classe MainView des del fitxer View.py
-from Presenter import MainPresenter
-from Model import TemperatureModel
+# -*- coding: utf-8 -*-
+
+import sys
+from PyQt5 import QtWidgets
+from View import View
+from Presenter import Presenter
+from Model import Model
 
 def main():
-    app = QApplication([])
-    model = TemperatureModel('temperatures_habitacions.xlsx')
-    view = MainView()  # Creem una instància de MainView
-    presenter = MainPresenter(view)
+    app = QtWidgets.QApplication(sys.argv)
+    model = Model()
+    view = View()
+    presenter = Presenter(view, model)
+    view.set_presenter(presenter)
+    view.setWindowTitle("Espai EEBE")
     view.show()
-    app.exec_()
+    sys.exit(app.exec_())
 
 if __name__ == "__main__":
     main()
+

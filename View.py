@@ -1,37 +1,49 @@
-from PyQt5.QtWidgets import QMainWindow, QComboBox
+from PyQt5 import QtWidgets
 from ui_EEBE_Mapa import Ui_Planta_3
-from Model import TemperatureModel
 
-class MainView(QMainWindow, Ui_Planta_3):
-    def __init__(self):
-        super(MainView, self).__init__()
+class View(QtWidgets.QMainWindow, Ui_Planta_3):
+    def __init__(self, presenter=None):
+        super().__init__()
         self.setupUi(self)
-        self.model = TemperatureModel('temperatures_habitacions.xlsx')
+        self.presenter = presenter
+        self.plantas.setEnabled(False)
+        self.edificios.currentIndexChanged.connect(self.habilitar_plantas)
+        self.edificios.currentIndexChanged.connect(self.cambiar_pag)# Conectar la señal currentIndexChanged del comboBox a un método
+        self.plantas.currentIndexChanged.connect(self.cambiar_pag)
+        self.OK1.clicked.connect(self.update_labels1)
+        self.OK1.clicked.connect(self.update_color)
+        self.OK2.clicked.connect(self.update_labels2)
+        self.OK2.clicked.connect(self.update_color)
+        self.OK3.clicked.connect(self.update_labels3)
+        self.OK3.clicked.connect(self.update_color)
+        self.BACK1.clicked.connect(self.atras)
+        self.BACK2.clicked.connect(self.atras)
+        self.BACK3.clicked.connect(self.atras)
 
-        self.dia.addItems([str(i) for i in range(1, 31)])
-        self.mes.addItems([str(i) for i in range(1, 13)])
-        self.any.addItems(['2024'])
+    def set_presenter(self, presenter):
+        self.presenter = presenter
 
-        # Configura els QLabel amb fons transparent
-        for i in range(1, 18):
-            label = getattr(self, f'A{i}')
-            label.setStyleSheet("background-color: rgba(0, 0, 0, 0);")
+    def habilitar_plantas(self):
+        if self.presenter:
+            self.presenter.habilitar_plantas()
+    def cambiar_pag(self):
+        if self.presenter:
+            self.presenter.cambiar_pag()
+    def update_labels1(self):
+        if self.presenter:
+            self.presenter.update_labels1()
+    def update_labels2(self):
+        if self.presenter:
+            self.presenter.update_labels2()
 
+    def update_labels3(self):
+        if self.presenter:
+            self.presenter.update_labels3()
 
-        self.dia.currentIndexChanged.connect(self.actualitzar_temperatures)
-        self.mes.currentIndexChanged.connect(self.actualitzar_temperatures)
-        self.any.currentIndexChanged.connect(self.actualitzar_temperatures)
+    def update_color(self):
+        if self.presenter:
+            self.presenter.update_color()
 
-    def actualitzar_temperatures(self):
-        if self.dia.currentText() == '-' or self.mes.currentText() == '-' or self.any.currentText() == '-':
-            return
-
-        day = int(self.dia.currentText())
-        month = int(self.mes.currentText())
-        year = int(self.any.currentText())
-
-        for i in range(1, 19):
-            room = f'H{i}'
-            temperature = self.model.get_temperature(day, month, year, room)
-            label = getattr(self, f'A{i}')
-            label.setText(f"{temperature}°C")
+    def atras(self):
+        if self.presenter:
+            self.presenter.atras()
