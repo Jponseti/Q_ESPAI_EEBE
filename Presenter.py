@@ -128,7 +128,7 @@ class Presenter(QObject):
                             "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
                     elif 23 < temp <= 24: #Vermell fort
                         color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(204,0,0,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(127,0,44,255), stop:0.982955 rgba(255, 255, 255, 255))")
                     else: #Fucsia
                         color_label.setStyleSheet(
                             "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,0,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
@@ -170,7 +170,7 @@ class Presenter(QObject):
                                 "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
                         elif 23 < temp <= 24:  # Vermell fort
                             color_label.setStyleSheet(
-                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(204,0,0,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(127,0,44,255), stop:0.982955 rgba(255, 255, 255, 255))")
                         else:  # Fucsia
                             color_label.setStyleSheet(
                                 "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,0,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
@@ -211,7 +211,7 @@ class Presenter(QObject):
                                 "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
                         elif 23 < temp <= 24:  # Vermell fort
                             color_label.setStyleSheet(
-                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(204,0,0,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(127,0,44,255), stop:0.982955 rgba(255, 255, 255, 255))")
                         else:  # Fucsia
                             color_label.setStyleSheet(
                                 "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,0,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
