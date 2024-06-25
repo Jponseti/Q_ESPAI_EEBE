@@ -107,31 +107,31 @@ class Presenter(QObject):
                     temp = float(temp)
                     if temp <= 17: #Lila
                         color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(45, 0, 154, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(89,0,127,255), stop:0.982955 rgba(255, 255, 255, 255))")
                     elif 17 < temp <= 18: #Blau fort
                         color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 54, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0,127,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
                     elif 18 < temp <= 19: #Blau fluix
                         color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 217, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0,255,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
                     elif 19 < temp <= 20: #Verd
                         color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 239, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(102,191,38,255), stop:0.982955 rgba(255, 255, 255, 255))")
                     elif 20 < temp <= 21:  # Groc
                         color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(0, 255, 87, 255), stop: 0.982955 rgba(255, 255, 255, 255))")
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,255,0,255), stop: 0.982955 rgba(255, 255, 255, 255))")
                     elif 21 < temp <= 22:#Taronja
                         color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 152, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255,114,0,255), stop:0.982955 rgba(255, 255, 255, 255))")
                     elif 22 < temp <= 23: #Vermell
                         color_label.setStyleSheet(
                             "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
-                    elif 22 < temp <= 23: #Vermell fort
+                    elif 23 < temp <= 24: #Vermell fort
                         color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(177, 0, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(204,0,0,255), stop:0.982955 rgba(255, 255, 255, 255))")
                     else: #Fucsia
                         color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(223, 0, 180, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,0,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
 
             except AttributeError as e:
                 print(f"AttributeError: {e}")
@@ -145,24 +145,35 @@ class Presenter(QObject):
                 temp = temp_label.text()
                 if temp:
                     temp = float(temp)
-                    if temp <= 10:
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 54, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 10 < temp <= 16:
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 217, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 16 < temp <= 19:
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 239, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 19 < temp <= 24:
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 152, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 24 < temp <= 30:
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
-                    else:
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(177, 0, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    if temp:
+                        temp = float(temp)
+                        if temp <= 17:  # Lila
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(89,0,127,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                        elif 17 < temp <= 18:  # Blau fort
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0,127,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                        elif 18 < temp <= 19:  # Blau fluix
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0,255,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                        elif 19 < temp <= 20:  # Verd
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(102,191,38,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                        elif 20 < temp <= 21:  # Groc
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,255,0,255), stop: 0.982955 rgba(255, 255, 255, 255))")
+                        elif 21 < temp <= 22:  # Taronja
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255,114,0,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                        elif 22 < temp <= 23:  # Vermell
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
+                        elif 23 < temp <= 24:  # Vermell fort
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(204,0,0,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                        else:  # Fucsia
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,0,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
             except AttributeError as e:
                 print(f"AttributeError: {e}")
 
@@ -175,24 +186,35 @@ class Presenter(QObject):
                 temp = temp_label.text()
                 if temp:
                     temp = float(temp)
-                    if temp <= 10:
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 54, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 10 < temp <= 16:
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 217, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 16 < temp <= 19:
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 239, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 19 < temp <= 24:
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 152, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 24 < temp <= 30:
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
-                    else:
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(177, 0, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    if temp:
+                        temp = float(temp)
+                        if temp <= 17:  # Lila
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(89,0,127,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                        elif 17 < temp <= 18:  # Blau fort
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0,127,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                        elif 18 < temp <= 19:  # Blau fluix
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0,255,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                        elif 19 < temp <= 20:  # Verd
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(102,191,38,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                        elif 20 < temp <= 21:  # Groc
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,255,0,255), stop: 0.982955 rgba(255, 255, 255, 255))")
+                        elif 21 < temp <= 22:  # Taronja
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255,114,0,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                        elif 22 < temp <= 23:  # Vermell
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
+                        elif 23 < temp <= 24:  # Vermell fort
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(204,0,0,255), stop:0.982955 rgba(255, 255, 255, 255))")
+                        else:  # Fucsia
+                            color_label.setStyleSheet(
+                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,0,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
             except AttributeError as e:
                 print(f"AttributeError: {e}")
 
