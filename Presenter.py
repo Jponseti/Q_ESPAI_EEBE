@@ -31,7 +31,7 @@ class Presenter(QObject):
         anyo = self.view.any1.currentText()
 
         try:
-            data1 = self.model.get_data(dia, mes, anyo, "tempaulesP1.xlsx")
+            data1 = self.model.get_data(dia, mes, anyo, "temperatures_planta1.xlsx")
         except Exception as e:
             print(f"Error loading data: {e}")
             return
@@ -54,7 +54,7 @@ class Presenter(QObject):
         anyo = self.view.any2.currentText()
 
         try:
-            data2 = self.model.get_data(dia, mes, anyo, "tempaulesP2.xlsx")
+            data2 = self.model.get_data(dia, mes, anyo, "temperatures_planta2.xlsx")
         except Exception as e:
             print(f"Error loading data: {e}")
             return
@@ -78,7 +78,7 @@ class Presenter(QObject):
         anyo = self.view.any3.currentText()
 
         try:
-            data3 = self.model.get_data(dia, mes, anyo, "tempaulesP3.xlsx")
+            data3 = self.model.get_data(dia, mes, anyo, "temperatures_planta3.xlsx")
         except Exception as e:
             print(f"Error loading data: {e}")
             return
