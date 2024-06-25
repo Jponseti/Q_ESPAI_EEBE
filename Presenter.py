@@ -1,37 +1,257 @@
-# Aqui esta el codigo que conecta View con Model
 from PyQt5.QtCore import QObject
-from Model import Model
 
 class Presenter(QObject):
     def __init__(self, view, model):
         super().__init__()
         self.view = view
         self.model = model
+        self.data_loaded_p1 = False  # Estado de carga de datos para planta 1
+        self.data_loaded_p2 = False  # Estado de carga de datos para planta 2
+        self.data_loaded_p3 = False  # Estado de carga de datos para planta 3
 
-    def update_labels(self):
-        dia = self.view.dia.currentText()
-        mes = self.view.mes.currentText()
-        anyo = self.view.any.currentText()
+    def habilitar_plantas(self):
+        if self.view.edificios.currentIndex() != 0:  # Asumiendo que el índice 0 es la opción por defecto
+            self.view.plantas.setEnabled(True)
+        else:
+            self.view.plantas.setEnabled(False)
+            self.view.plantas.setCurrentIndex(0)
+    def cambiar_pag(self):
+        if self.view.edificios.currentIndex() == 1 and self.view.plantas.currentIndex() == 1:  # Cambiar estos índices según corresponda
+            self.view.stackedWidget.setCurrentIndex(1)  # Cambia a la segunda página
+            self.view.tabWidget.setCurrentIndex(0)  # Selecciona la primera pestaña del tabWidget
+        elif self.view.edificios.currentIndex() == 1 and self.view.plantas.currentIndex() == 2:
+            self.view.stackedWidget.setCurrentIndex(1)
+            self.view.tabWidget.setCurrentIndex(1)  # Selecciona la segunda pestaña del tabWidget
+        elif self.view.edificios.currentIndex() == 1 and self.view.plantas.currentIndex() == 3:
+            self.view.stackedWidget.setCurrentIndex(1)
+            self.view.tabWidget.setCurrentIndex(2)  # Selecciona la tercera pestaña del tabWidget
+        else:
+            self.view.stackedWidget.setCurrentIndex(0)  # Volver a la primera página si las condiciones no se cumplen
 
-        datos_filtrados = self.model.get_data(dia, mes, anyo)
+    def update_labels1(self):
+        if self.data_loaded_p1:
+            return
+        dia = self.view.dia1.currentText()
+        mes = self.view.mes1.currentText()
+        anyo = self.view.any1.currentText()
 
-        if datos_filtrados is None:
+        try:
+            data1 = self.model.get_data(dia, mes, anyo, "tempaulesP1.xlsx")
+        except Exception as e:
+            print(f"Error loading data: {e}")
             return
 
-        self.view.A1.setText(str(datos_filtrados.get("H1", "")))
-        self.view.A2.setText(str(datos_filtrados.get("H2", "")))
-        self.view.A3.setText(str(datos_filtrados.get("H3", "")))
-        self.view.A4.setText(str(datos_filtrados.get("H4", "")))
-        self.view.A5.setText(str(datos_filtrados.get("H5", "")))
-        self.view.A6.setText(str(datos_filtrados.get("H6", "")))
-        self.view.A7.setText(str(datos_filtrados.get("H7", "")))
-        self.view.A8.setText(str(datos_filtrados.get("H8", "")))
-        self.view.A9.setText(str(datos_filtrados.get("H9", "")))
-        self.view.A10.setText(str(datos_filtrados.get("H10", "")))
-        self.view.A11.setText(str(datos_filtrados.get("H11", "")))
-        self.view.A12.setText(str(datos_filtrados.get("H12", "")))
-        self.view.A13.setText(str(datos_filtrados.get("H13", "")))
-        self.view.A14.setText(str(datos_filtrados.get("H14", "")))
-        self.view.A15.setText(str(datos_filtrados.get("H15", "")))
-        self.view.A16.setText(str(datos_filtrados.get("H16", "")))
-        self.view.A17.setText(str(datos_filtrados.get("H17", "")))
+        if data1 is None:
+            return
+
+        for i in range(1, 16):
+            label_name = f"A1{i}"
+            try:
+                label = getattr(self.view, label_name)
+                label.setText(str(data1.get(f"H{i}", "")))
+            except AttributeError as e:
+                print(f"AttributeError: {e}")
+
+        self.data_loaded_p1 = True  # Indicar que los datos de la planta 1 están cargados
+
+    def update_labels2(self):
+        if self.data_loaded_p2:
+            return
+
+        dia = self.view.dia2.currentText()
+        mes = self.view.mes2.currentText()
+        anyo = self.view.any2.currentText()
+
+        try:
+            data2 = self.model.get_data(dia, mes, anyo, "tempaulesP2.xlsx")
+        except Exception as e:
+            print(f"Error loading data: {e}")
+            return
+
+        if data2 is None:
+            return
+
+        for i in range(1, 16):
+            label_name = f"A2{i}"
+            try:
+                label = getattr(self.view, label_name)
+                label.setText(str(data2.get(f"H{i}", "")))
+            except AttributeError as e:
+                print(f"AttributeError: {e}")
+
+        self.data_loaded_p2 = True  # Indicar que los datos de la planta 2 están cargados
+
+    def update_labels3(self):
+        if self.data_loaded_p3:
+            return
+
+        dia = self.view.dia3.currentText()
+        mes = self.view.mes3.currentText()
+        anyo = self.view.any3.currentText()
+
+        try:
+            data3 = self.model.get_data(dia, mes, anyo, "tempaulesP3.xlsx")
+        except Exception as e:
+            print(f"Error loading data: {e}")
+            return
+
+        if data3 is None:
+            return
+
+        for i in range(1, 12):
+            label_name = f"A3{i}"
+            try:
+                label = getattr(self.view, label_name)
+                label.setText(str(data3.get(f"H{i}", "")))
+            except AttributeError as e:
+                print(f"AttributeError: {e}")
+
+        self.data_loaded_p3 = True  # Indicar que los datos de la planta 3 están cargados
+
+    def update_color(self):
+        for i in range(1, 16):
+            temp_label_name = f"A1{i}"
+            color_label_name = f"colorA1{i}"
+            try:
+                temp_label = getattr(self.view, temp_label_name)
+                color_label = getattr(self.view, color_label_name)
+                temp = temp_label.text()
+                if temp:
+                    temp = float(temp)
+                    if temp <= 10:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 54, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    elif 10 < temp <= 16:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 217, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    elif 16 < temp <= 19:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 239, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    elif 19 < temp <= 24:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 152, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    elif 24 < temp <= 30:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
+                    else:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(177, 0, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+            except AttributeError as e:
+                print(f"AttributeError: {e}")
+
+        for i in range(1, 16):
+            temp_label_name = f"A2{i}"
+            color_label_name = f"colorA2{i}"
+            try:
+                temp_label = getattr(self.view, temp_label_name)
+                color_label = getattr(self.view, color_label_name)
+                temp = temp_label.text()
+                if temp:
+                    temp = float(temp)
+                    if temp <= 10:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 54, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    elif 10 < temp <= 16:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 217, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    elif 16 < temp <= 19:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 239, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    elif 19 < temp <= 24:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 152, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    elif 24 < temp <= 30:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
+                    else:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(177, 0, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+            except AttributeError as e:
+                print(f"AttributeError: {e}")
+
+        for i in range(1, 12):
+            temp_label_name = f"A3{i}"
+            color_label_name = f"colorA3{i}"
+            try:
+                temp_label = getattr(self.view, temp_label_name)
+                color_label = getattr(self.view, color_label_name)
+                temp = temp_label.text()
+                if temp:
+                    temp = float(temp)
+                    if temp <= 10:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 54, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    elif 10 < temp <= 16:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 217, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    elif 16 < temp <= 19:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 239, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    elif 19 < temp <= 24:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 152, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+                    elif 24 < temp <= 30:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
+                    else:
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(177, 0, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
+            except AttributeError as e:
+                print(f"AttributeError: {e}")
+
+    def atras(self):
+        # Limpiar temperaturas y colores de la planta 1
+        for i in range(1, 16):
+            label_name = f"A1{i}"
+            color_label_name = f"colorA1{i}"
+            try:
+                temp_label = getattr(self.view, label_name)
+                color_label = getattr(self.view, color_label_name)
+                temp_label.setText("")
+                color_label.setStyleSheet("")
+            except AttributeError as e:
+                print(f"AttributeError: {e}")
+
+        # Limpiar temperaturas y colores de la planta 2
+        for i in range(1, 16):
+            label_name = f"A2{i}"
+            color_label_name = f"colorA2{i}"
+            try:
+                temp_label = getattr(self.view, label_name)
+                color_label = getattr(self.view, color_label_name)
+                temp_label.setText("")
+                color_label.setStyleSheet("")
+            except AttributeError as e:
+                print(f"AttributeError: {e}")
+
+        # Limpiar temperaturas y colores de la planta 3
+        for i in range(1, 12):
+            label_name = f"A3{i}"
+            color_label_name = f"colorA3{i}"
+            try:
+                temp_label = getattr(self.view, label_name)
+                color_label = getattr(self.view, color_label_name)
+                temp_label.setText("")
+                color_label.setStyleSheet("")
+            except AttributeError as e:
+                print(f"AttributeError: {e}")
+
+        self.view.dia1.setCurrentIndex(0)
+        self.view.dia2.setCurrentIndex(0)
+        self.view.dia3.setCurrentIndex(0)
+        self.view.mes1.setCurrentIndex(0)
+        self.view.mes2.setCurrentIndex(0)
+        self.view.mes3.setCurrentIndex(0)
+        self.view.any1.setCurrentIndex(0)
+        self.view.any2.setCurrentIndex(0)
+        self.view.any3.setCurrentIndex(0)
+
+        self.view.edificios.setCurrentIndex(0)
+        self.view.plantas.setCurrentIndex(0)
+        self.view.plantas.setEnabled(False)
+        self.view.stackedWidget.setCurrentIndex(0)
+
+        # Reiniciar los estados de carga de datos para todas las plantas
+        self.data_loaded_p1 = False
+        self.data_loaded_p2 = False
+        self.data_loaded_p3 = False
