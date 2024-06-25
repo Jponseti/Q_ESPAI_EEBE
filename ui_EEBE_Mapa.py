@@ -390,7 +390,7 @@ class Ui_Planta_3(object):
         self.Planta2 = QLabel(self.planta2)
         self.Planta2.setObjectName(u"Planta2")
         self.Planta2.setGeometry(QRect(-150, 10, 1711, 951))
-        self.Planta2.setPixmap(QPixmap(u"../P2.PNG"))
+        self.Planta2.setPixmap(QPixmap(u"P2.PNG"))
         self.Planta2.setScaledContents(True)
         self.horizontalLayoutWidget = QWidget(self.planta2)
         self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
