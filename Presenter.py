@@ -72,7 +72,6 @@ class Presenter(QObject):
 
 
     def update_labels3(self):
-
         dia = self.view.dia3.currentText()
         mes = self.view.mes3.currentText()
         anyo = self.view.any3.currentText()

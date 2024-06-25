@@ -19,8 +19,11 @@ class Model:
                 raise ValueError(f"No se encontraron datos para la fecha: {day}/{month}/{year}")
 
             temperatures = {}
-            for i in range(1, 16):  # Suponiendo que hay 15 aulas
-                temperatures[f'H{i}'] = filtered_data.iloc[0][f'H{i}']
+            # Obtener las columnas que son aulas (columnas que empiezan con 'H')
+            aulas_columns = [col for col in filtered_data.columns if col.startswith('H')]
+            for col in aulas_columns:
+                temperatures[col] = filtered_data.iloc[0][col]
+
             return temperatures
 
         except FileNotFoundError:
