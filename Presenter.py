@@ -5,9 +5,6 @@ class Presenter(QObject):
         super().__init__()
         self.view = view
         self.model = model
-        self.data_loaded_p1 = False  # Estado de carga de datos para planta 1
-        self.data_loaded_p2 = False  # Estado de carga de datos para planta 2
-        self.data_loaded_p3 = False  # Estado de carga de datos para planta 3
 
     def habilitar_plantas(self):
         if self.view.edificios.currentIndex() != 0:  # Asumiendo que el índice 0 es la opción por defecto
@@ -29,8 +26,6 @@ class Presenter(QObject):
             self.view.stackedWidget.setCurrentIndex(0)  # Volver a la primera página si las condiciones no se cumplen
 
     def update_labels1(self):
-        if self.data_loaded_p1:
-            return
         dia = self.view.dia1.currentText()
         mes = self.view.mes1.currentText()
         anyo = self.view.any1.currentText()
@@ -52,11 +47,7 @@ class Presenter(QObject):
             except AttributeError as e:
                 print(f"AttributeError: {e}")
 
-        self.data_loaded_p1 = True  # Indicar que los datos de la planta 1 están cargados
-
     def update_labels2(self):
-        if self.data_loaded_p2:
-            return
 
         dia = self.view.dia2.currentText()
         mes = self.view.mes2.currentText()
@@ -79,11 +70,8 @@ class Presenter(QObject):
             except AttributeError as e:
                 print(f"AttributeError: {e}")
 
-        self.data_loaded_p2 = True  # Indicar que los datos de la planta 2 están cargados
 
     def update_labels3(self):
-        if self.data_loaded_p3:
-            return
 
         dia = self.view.dia3.currentText()
         mes = self.view.mes3.currentText()
@@ -106,7 +94,6 @@ class Presenter(QObject):
             except AttributeError as e:
                 print(f"AttributeError: {e}")
 
-        self.data_loaded_p3 = True  # Indicar que los datos de la planta 3 están cargados
 
     def update_color(self):
         for i in range(1, 16):
@@ -118,22 +105,25 @@ class Presenter(QObject):
                 temp = temp_label.text()
                 if temp:
                     temp = float(temp)
-                    if temp <= 10:
+                    if temp <= 16: #Blau fort
                         color_label.setStyleSheet(
                             "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 54, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 10 < temp <= 16:
+                    elif 16 < temp <= 18: #Blau fluix
                         color_label.setStyleSheet(
                             "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0, 217, 255, 255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 16 < temp <= 19:
+                    elif 18 < temp <= 19:#Groc
                         color_label.setStyleSheet(
                             "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 239, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 19 < temp <= 24:
+                    elif 19 < temp <= 21:  # Groc
+                        color_label.setStyleSheet(
+                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(0, 255, 87, 255), stop: 0.982955 rgba(255, 255, 255, 255))")
+                    elif 21 < temp <= 22:#Taronja
                         color_label.setStyleSheet(
                             "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255, 152, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 24 < temp <= 30:
+                    elif 22 < temp <= 24: #Vermell
                         color_label.setStyleSheet(
                             "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
-                    else:
+                    else: #Vermell fort
                         color_label.setStyleSheet(
                             "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(177, 0, 0, 255), stop:0.982955 rgba(255, 255, 255, 255))")
             except AttributeError as e:
@@ -250,8 +240,3 @@ class Presenter(QObject):
         self.view.plantas.setCurrentIndex(0)
         self.view.plantas.setEnabled(False)
         self.view.stackedWidget.setCurrentIndex(0)
-
-        # Reiniciar los estados de carga de datos para todas las plantas
-        self.data_loaded_p1 = False
-        self.data_loaded_p2 = False
-        self.data_loaded_p3 = False
