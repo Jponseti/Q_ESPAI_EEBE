@@ -7,31 +7,34 @@ class Presenter(QObject):
         self.model = model
 
     def habilitar_plantas(self):
-        if self.view.edificios.currentIndex() != 0:  # Asumiendo que el índice 0 es la opción por defecto
+        if self.view.edificios.currentIndex() != 0:
             self.view.plantas.setEnabled(True)
         else:
             self.view.plantas.setEnabled(False)
             self.view.plantas.setCurrentIndex(0)
+
     def cambiar_pag(self):
-        if self.view.edificios.currentIndex() == 1 and self.view.plantas.currentIndex() == 1:  # Cambiar estos índices según corresponda
-            self.view.stackedWidget.setCurrentIndex(1)  # Cambia a la segunda página
-            self.view.tabWidget.setCurrentIndex(0)  # Selecciona la primera pestaña del tabWidget
+        if self.view.edificios.currentIndex() == 1 and self.view.plantas.currentIndex() == 1:
+            self.view.stackedWidget.setCurrentIndex(1)
+            self.view.tabWidget.setCurrentIndex(0)
         elif self.view.edificios.currentIndex() == 1 and self.view.plantas.currentIndex() == 2:
             self.view.stackedWidget.setCurrentIndex(1)
-            self.view.tabWidget.setCurrentIndex(1)  # Selecciona la segunda pestaña del tabWidget
+            self.view.tabWidget.setCurrentIndex(1)
         elif self.view.edificios.currentIndex() == 1 and self.view.plantas.currentIndex() == 3:
             self.view.stackedWidget.setCurrentIndex(1)
-            self.view.tabWidget.setCurrentIndex(2)  # Selecciona la tercera pestaña del tabWidget
+            self.view.tabWidget.setCurrentIndex(2)
         else:
-            self.view.stackedWidget.setCurrentIndex(0)  # Volver a la primera página si las condiciones no se cumplen
+            self.view.stackedWidget.setCurrentIndex(0)
 
     def update_labels1(self):
         dia = self.view.dia1.currentText()
         mes = self.view.mes1.currentText()
         anyo = self.view.any1.currentText()
+        filepath = "temperatures_planta1.xlsx"
 
+        self.model.data_junto(dia, mes, anyo)
         try:
-            data1 = self.model.get_data(dia, mes, anyo, "temperatures_planta1.xlsx")
+            data1 = self.model.get_data(filepath)
         except Exception as e:
             print(f"Error loading data: {e}")
             return
@@ -48,13 +51,14 @@ class Presenter(QObject):
                 print(f"AttributeError: {e}")
 
     def update_labels2(self):
-
         dia = self.view.dia2.currentText()
         mes = self.view.mes2.currentText()
         anyo = self.view.any2.currentText()
+        filepath = "temperatures_planta2.xlsx"
 
+        self.model.data_junto(dia, mes, anyo)
         try:
-            data2 = self.model.get_data(dia, mes, anyo, "temperatures_planta2.xlsx")
+            data2 = self.model.get_data(filepath)
         except Exception as e:
             print(f"Error loading data: {e}")
             return
@@ -75,9 +79,11 @@ class Presenter(QObject):
         dia = self.view.dia3.currentText()
         mes = self.view.mes3.currentText()
         anyo = self.view.any3.currentText()
+        filepath = "temperatures_planta3.xlsx"
 
+        self.model.data_junto(dia, mes, anyo)
         try:
-            data3 = self.model.get_data(dia, mes, anyo, "temperatures_planta3.xlsx")
+            data3 = self.model.get_data(filepath)
         except Exception as e:
             print(f"Error loading data: {e}")
             return
@@ -140,7 +146,6 @@ class Presenter(QObject):
         update_color_planta(self.model.edificio.plantas[2], "A3")
 
     def atras(self):
-        # Limpiar temperaturas y colores de la planta 1
         planta1 = self.model.edificio.plantas[0]
         for i, aula in enumerate(planta1.aulas, start=1):
             label_name = aula.nombre
@@ -153,7 +158,6 @@ class Presenter(QObject):
             except AttributeError as e:
                 print(f"AttributeError: {e}")
 
-        # Limpiar temperaturas y colores de la planta 2
         planta2 = self.model.edificio.plantas[1]
         for i, aula in enumerate(planta2.aulas, start=1):
             label_name = aula.nombre
@@ -166,7 +170,6 @@ class Presenter(QObject):
             except AttributeError as e:
                 print(f"AttributeError: {e}")
 
-        # Limpiar temperaturas y colores de la planta 3
         planta3 = self.model.edificio.plantas[2]
         for i, aula in enumerate(planta3.aulas, start=1):
             label_name = aula.nombre

@@ -21,10 +21,22 @@ class Edificio:
     def agregar_planta(self, planta):
         self.plantas.append(planta)
 
+class Data:
+    def __init__(self):
+        self.day = None
+        self.month = None
+        self.year = None
+
+    def inicia_data(self, day, month, year):
+        self.day = day
+        self.month = month
+        self.year = year
+
 class Model:
     def __init__(self):
         super().__init__()
         self.edificio = self.crear_edificio()
+        self.data = Data()
 
     def crear_edificio(self):
         edificio = Edificio("Edificio Principal")
@@ -52,21 +64,21 @@ class Model:
 
         return edificio
 
-    def get_data(self, day, month, year, filepath):
-        try:
-            # Cargar el archivo Excel
-            df = pd.read_excel(filepath)
 
-            # Filtrar los datos según el día, mes y año
-            filtered_data = df[(df['Dia'] == int(day)) &
-                               (df['Mes'] == int(month)) &
-                               (df['Any'] == int(year))]
+    def data_junto(self, day, month, year):
+        self.data.inicia_data(day, month, year)
+
+    def get_data(self, filepath):
+        try:
+            df = pd.read_excel(filepath)
+            filtered_data = df[(df['Dia'] == int(self.data.day)) &
+                               (df['Mes'] == int(self.data.month)) &
+                               (df['Any'] == int(self.data.year))]
 
             if filtered_data.empty:
-                raise ValueError(f"No se encontraron datos para la fecha: {day}/{month}/{year}")
+                raise ValueError(f"No se encontraron datos para la fecha: {self.data.day}/{self.data.month}/{self.data.year}")
 
             temperatures = {}
-            # Obtener las columnas que son aulas (columnas que empiezan con 'H')
             aulas_columns = [col for col in filtered_data.columns if col.startswith('H')]
             for col in aulas_columns:
                 temperatures[col] = filtered_data.iloc[0][col]
@@ -82,4 +94,5 @@ class Model:
         except Exception as e:
             print(f"Error inesperado: {e}")
             return None
+
 
