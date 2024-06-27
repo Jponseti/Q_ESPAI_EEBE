@@ -93,59 +93,15 @@ class Presenter(QObject):
             except AttributeError as e:
                 print(f"AttributeError: {e}")
 
-
     def update_color(self):
-        planta1 = self.model.edificio.plantas[0]
-        for i, aula in enumerate(planta1.aulas, start=1):
-            temp_label_name = aula.nombre
-            color_label_name = f"colorA1{i}"
-            try:
-                temp_label = getattr(self.view, temp_label_name)
-                color_label = getattr(self.view, color_label_name)
-                temp = temp_label.text()
-                if temp:
-                    temp = float(temp)
-                    if temp <= 17: #Lila
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(89,0,127,255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 17 < temp <= 18: #Blau fort
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0,127,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 18 < temp <= 19: #Blau fluix
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0,255,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 19 < temp <= 20: #Verd
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(102,191,38,255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 20 < temp <= 21:  # Groc
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,255,0,255), stop: 0.982955 rgba(255, 255, 255, 255))")
-                    elif 21 < temp <= 22:#Taronja
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255,114,0,255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    elif 22 < temp <= 23: #Vermell
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
-                    elif 23 < temp <= 24: #Vermell fort
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(127,0,44,255), stop:0.982955 rgba(255, 255, 255, 255))")
-                    else: #Fucsia
-                        color_label.setStyleSheet(
-                            "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,0,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
-
-            except AttributeError as e:
-                print(f"AttributeError: {e}")
-
-        planta2 = self.model.edificio.plantas[1]
-        for i, aula in enumerate(planta2.aulas, start=1):
-            temp_label_name = aula.nombre
-            color_label_name = f"colorA2{i}"
-            try:
-                temp_label = getattr(self.view, temp_label_name)
-                color_label = getattr(self.view, color_label_name)
-                temp = temp_label.text()
-                if temp:
-                    temp = float(temp)
+        def update_color_planta(planta, prefijo):
+            for i, aula in enumerate(planta.aulas, start=1):
+                temp_label_name = aula.nombre
+                color_label_name = f"color{prefijo}{i}"
+                try:
+                    temp_label = getattr(self.view, temp_label_name)
+                    color_label = getattr(self.view, color_label_name)
+                    temp = temp_label.text()
                     if temp:
                         temp = float(temp)
                         if temp <= 17:  # Lila
@@ -175,50 +131,13 @@ class Presenter(QObject):
                         else:  # Fucsia
                             color_label.setStyleSheet(
                                 "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,0,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
-            except AttributeError as e:
-                print(f"AttributeError: {e}")
 
-        planta3 = self.model.edificio.plantas[2]
-        for i, aula in enumerate(planta3.aulas, start=1):
-            temp_label_name = aula.nombre
-            color_label_name = f"colorA3{i}"
-            try:
-                temp_label = getattr(self.view, temp_label_name)
-                color_label = getattr(self.view, color_label_name)
-                temp = temp_label.text()
-                if temp:
-                    temp = float(temp)
-                    if temp:
-                        temp = float(temp)
-                        if temp <= 17:  # Lila
-                            color_label.setStyleSheet(
-                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(89,0,127,255), stop:0.982955 rgba(255, 255, 255, 255))")
-                        elif 17 < temp <= 18:  # Blau fort
-                            color_label.setStyleSheet(
-                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0,127,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
-                        elif 18 < temp <= 19:  # Blau fluix
-                            color_label.setStyleSheet(
-                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(0,255,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
-                        elif 19 < temp <= 20:  # Verd
-                            color_label.setStyleSheet(
-                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(102,191,38,255), stop:0.982955 rgba(255, 255, 255, 255))")
-                        elif 20 < temp <= 21:  # Groc
-                            color_label.setStyleSheet(
-                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,255,0,255), stop: 0.982955 rgba(255, 255, 255, 255))")
-                        elif 21 < temp <= 22:  # Taronja
-                            color_label.setStyleSheet(
-                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.193182 rgba(255,114,0,255), stop:0.982955 rgba(255, 255, 255, 255))")
-                        elif 22 < temp <= 23:  # Vermell
-                            color_label.setStyleSheet(
-                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))")
-                        elif 23 < temp <= 24:  # Vermell fort
-                            color_label.setStyleSheet(
-                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(127,0,44,255), stop:0.982955 rgba(255, 255, 255, 255))")
-                        else:  # Fucsia
-                            color_label.setStyleSheet(
-                                "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,0,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
-            except AttributeError as e:
-                print(f"AttributeError: {e}")
+                except AttributeError as e:
+                    print(f"AttributeError: {e}")
+
+        update_color_planta(self.model.edificio.plantas[0], "A1")
+        update_color_planta(self.model.edificio.plantas[1], "A2")
+        update_color_planta(self.model.edificio.plantas[2], "A3")
 
     def atras(self):
         # Limpiar temperaturas y colores de la planta 1
