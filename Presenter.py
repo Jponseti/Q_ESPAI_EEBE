@@ -39,10 +39,10 @@ class Presenter(QObject):
         if data1 is None:
             return
 
-        for i in range(1, 16):
-            label_name = f"A1{i}"
+        planta1 = self.model.edificio.plantas[0]
+        for i, aula in enumerate(planta1.aulas, start=1):
             try:
-                label = getattr(self.view, label_name)
+                label = getattr(self.view, aula.nombre)
                 label.setText(str(data1.get(f"H{i}", "")))
             except AttributeError as e:
                 print(f"AttributeError: {e}")
@@ -62,10 +62,10 @@ class Presenter(QObject):
         if data2 is None:
             return
 
-        for i in range(1, 16):
-            label_name = f"A2{i}"
+        planta2 = self.model.edificio.plantas[1]
+        for i, aula in enumerate(planta2.aulas, start=1):
             try:
-                label = getattr(self.view, label_name)
+                label = getattr(self.view, aula.nombre)
                 label.setText(str(data2.get(f"H{i}", "")))
             except AttributeError as e:
                 print(f"AttributeError: {e}")
@@ -85,18 +85,19 @@ class Presenter(QObject):
         if data3 is None:
             return
 
-        for i in range(1, 12):
-            label_name = f"A3{i}"
+        planta3 = self.model.edificio.plantas[2]
+        for i, aula in enumerate(planta3.aulas, start=1):
             try:
-                label = getattr(self.view, label_name)
+                label = getattr(self.view, aula.nombre)
                 label.setText(str(data3.get(f"H{i}", "")))
             except AttributeError as e:
                 print(f"AttributeError: {e}")
 
 
     def update_color(self):
-        for i in range(1, 16):
-            temp_label_name = f"A1{i}"
+        planta1 = self.model.edificio.plantas[0]
+        for i, aula in enumerate(planta1.aulas, start=1):
+            temp_label_name = aula.nombre
             color_label_name = f"colorA1{i}"
             try:
                 temp_label = getattr(self.view, temp_label_name)
@@ -135,8 +136,9 @@ class Presenter(QObject):
             except AttributeError as e:
                 print(f"AttributeError: {e}")
 
-        for i in range(1, 16):
-            temp_label_name = f"A2{i}"
+        planta2 = self.model.edificio.plantas[1]
+        for i, aula in enumerate(planta2.aulas, start=1):
+            temp_label_name = aula.nombre
             color_label_name = f"colorA2{i}"
             try:
                 temp_label = getattr(self.view, temp_label_name)
@@ -176,8 +178,9 @@ class Presenter(QObject):
             except AttributeError as e:
                 print(f"AttributeError: {e}")
 
-        for i in range(1, 12):
-            temp_label_name = f"A3{i}"
+        planta3 = self.model.edificio.plantas[2]
+        for i, aula in enumerate(planta3.aulas, start=1):
+            temp_label_name = aula.nombre
             color_label_name = f"colorA3{i}"
             try:
                 temp_label = getattr(self.view, temp_label_name)
@@ -219,8 +222,9 @@ class Presenter(QObject):
 
     def atras(self):
         # Limpiar temperaturas y colores de la planta 1
-        for i in range(1, 16):
-            label_name = f"A1{i}"
+        planta1 = self.model.edificio.plantas[0]
+        for i, aula in enumerate(planta1.aulas, start=1):
+            label_name = aula.nombre
             color_label_name = f"colorA1{i}"
             try:
                 temp_label = getattr(self.view, label_name)
@@ -231,8 +235,9 @@ class Presenter(QObject):
                 print(f"AttributeError: {e}")
 
         # Limpiar temperaturas y colores de la planta 2
-        for i in range(1, 16):
-            label_name = f"A2{i}"
+        planta2 = self.model.edificio.plantas[1]
+        for i, aula in enumerate(planta2.aulas, start=1):
+            label_name = aula.nombre
             color_label_name = f"colorA2{i}"
             try:
                 temp_label = getattr(self.view, label_name)
@@ -243,8 +248,9 @@ class Presenter(QObject):
                 print(f"AttributeError: {e}")
 
         # Limpiar temperaturas y colores de la planta 3
-        for i in range(1, 12):
-            label_name = f"A3{i}"
+        planta3 = self.model.edificio.plantas[2]
+        for i, aula in enumerate(planta3.aulas, start=1):
+            label_name = aula.nombre
             color_label_name = f"colorA3{i}"
             try:
                 temp_label = getattr(self.view, label_name)
@@ -268,3 +274,4 @@ class Presenter(QObject):
         self.view.plantas.setCurrentIndex(0)
         self.view.plantas.setEnabled(False)
         self.view.stackedWidget.setCurrentIndex(0)
+
