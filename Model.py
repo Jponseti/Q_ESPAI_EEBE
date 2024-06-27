@@ -92,7 +92,7 @@ class Model:
             print(ve)
             return None
         except Exception as e:
-            print(f"Error inesperado: {e}")
+            print(f"Error inesperado en obtener Data: {e}")
             return None
 
 

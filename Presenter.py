@@ -36,7 +36,7 @@ class Presenter(QObject):
         try:
             data1 = self.model.get_data(filepath)
         except Exception as e:
-            print(f"Error loading data: {e}")
+            print(f"Error en data P1: {e}")
             return
 
         if data1 is None:
@@ -48,7 +48,7 @@ class Presenter(QObject):
                 label = getattr(self.view, aula.nombre)
                 label.setText(str(data1.get(f"H{i}", "")))
             except AttributeError as e:
-                print(f"AttributeError: {e}")
+                print(f"AttributeError en P1: {e}")
 
     def update_labels2(self):
         dia = self.view.dia2.currentText()
@@ -60,7 +60,7 @@ class Presenter(QObject):
         try:
             data2 = self.model.get_data(filepath)
         except Exception as e:
-            print(f"Error loading data: {e}")
+            print(f"Error en data P2: {e}")
             return
 
         if data2 is None:
@@ -72,7 +72,7 @@ class Presenter(QObject):
                 label = getattr(self.view, aula.nombre)
                 label.setText(str(data2.get(f"H{i}", "")))
             except AttributeError as e:
-                print(f"AttributeError: {e}")
+                print(f"AttributeError en P2: {e}")
 
 
     def update_labels3(self):
@@ -85,7 +85,7 @@ class Presenter(QObject):
         try:
             data3 = self.model.get_data(filepath)
         except Exception as e:
-            print(f"Error loading data: {e}")
+            print(f"Error en data P3: {e}")
             return
 
         if data3 is None:
@@ -97,7 +97,7 @@ class Presenter(QObject):
                 label = getattr(self.view, aula.nombre)
                 label.setText(str(data3.get(f"H{i}", "")))
             except AttributeError as e:
-                print(f"AttributeError: {e}")
+                print(f"AttributeError en P3: {e}")
 
     def update_color(self):
         def update_color_planta(planta, prefijo):
@@ -139,7 +139,7 @@ class Presenter(QObject):
                                 "background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.255682 rgba(255,0,255,255), stop:0.982955 rgba(255, 255, 255, 255))")
 
                 except AttributeError as e:
-                    print(f"AttributeError: {e}")
+                    print(f"AttributeError en colores: {e}")
 
         update_color_planta(self.model.edificio.plantas[0], "A1")
         update_color_planta(self.model.edificio.plantas[1], "A2")
@@ -156,7 +156,7 @@ class Presenter(QObject):
                 temp_label.setText("")
                 color_label.setStyleSheet("")
             except AttributeError as e:
-                print(f"AttributeError: {e}")
+                print(f"AttributeError en P1: {e}")
 
         planta2 = self.model.edificio.plantas[1]
         for i, aula in enumerate(planta2.aulas, start=1):
@@ -168,7 +168,7 @@ class Presenter(QObject):
                 temp_label.setText("")
                 color_label.setStyleSheet("")
             except AttributeError as e:
-                print(f"AttributeError: {e}")
+                print(f"AttributeError en P2: {e}")
 
         planta3 = self.model.edificio.plantas[2]
         for i, aula in enumerate(planta3.aulas, start=1):
@@ -180,7 +180,7 @@ class Presenter(QObject):
                 temp_label.setText("")
                 color_label.setStyleSheet("")
             except AttributeError as e:
-                print(f"AttributeError: {e}")
+                print(f"AttributeError en P3: {e}")
 
         self.view.dia1.setCurrentIndex(0)
         self.view.dia2.setCurrentIndex(0)
