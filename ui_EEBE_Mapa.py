@@ -884,7 +884,7 @@ class Ui_Planta_3(object):
         self.edificios.setItemText(0, QCoreApplication.translate("Planta_3", u"Tria un edifici", None))
         self.edificios.setItemText(1, QCoreApplication.translate("Planta_3", u"EEBE UPC - Edifici A", None))
 
-        self.explicacion.setText(QCoreApplication.translate("Planta_3", u"<html><head/><body><p align=\"justify\"><span style=\" font-size:11pt;\">Al simulador es poden consultar les temperatures en funci\u00f3 de les aules de les plantes i edificis de l'Escola d'Enginyeria de Barcelona Est i en funci\u00f3 de la data escollida.</span></p></body></html>", None))
+        self.explicacion.setText(QCoreApplication.translate("Planta_3", u"<html><head/><body><p align=\"justify\"><span style=\" font-size:11pt;\">Al simulador d'espais es poden consultar les temperatures en funci\u00f3 de les aules, les plantes i els edificis de l'Escola d'Enginyeria de Barcelona Est, i en funci\u00f3 de la data escollida.</span></p></body></html>", None))
         self.titulo.setText(QCoreApplication.translate("Planta_3", u"SIMULADOR DE TEMPERATURES EEBE UPC", None))
         self.blank.setText("")
         self.blank2.setText("")
@@ -1124,5 +1124,4 @@ class Ui_Planta_3(object):
         self.BACK3.setText(QCoreApplication.translate("Planta_3", u"ENRERE", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.planta3), QCoreApplication.translate("Planta_3", u"Planta 3", None))
     # retranslateUi
-
 

@@ -20,6 +20,15 @@ class View(QtWidgets.QMainWindow, Ui_Planta_3):
         self.BACK2.clicked.connect(self.atras)
         self.BACK3.clicked.connect(self.atras)
 
+        self.setFixedSize(1550, 1050)
+        self.center()
+
+    def center(self):
+        cuadrado = self.frameGeometry()
+        centro = QtWidgets.QDesktopWidget().availableGeometry().center()
+        cuadrado.moveCenter(centro)
+        self.move(cuadrado.topLeft())
+
     def set_presenter(self, presenter):
         self.presenter = presenter
 
