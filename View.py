@@ -20,7 +20,6 @@ class View(QtWidgets.QMainWindow, Ui_Planta_3):
         self.BACK2.clicked.connect(self.atras)
         self.BACK3.clicked.connect(self.atras)
 
-        self.setFixedSize(1550, 1050)
         self.center()
 
     def center(self):

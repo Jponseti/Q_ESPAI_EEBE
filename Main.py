@@ -8,7 +8,7 @@ from Presenter import Presenter
 from Model import Model
 
 def main():
-    os.environ["QT_SCALE_FACTOR"] = "1.5"  # Variable de entorno para escalar
+    os.environ["QT_SCALE_FACTOR"] = "1.2"  # Variable de entorno para escalar
     app = QtWidgets.QApplication(sys.argv)
 
     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) #Habilita el escalado automático de la interfaz de usuario para pantallas de alta DPI
